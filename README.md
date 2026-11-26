@@ -1,2 +1,2 @@
 # QuickshellConfig
-Personnal config to learn Quickshell an QML
+Personal config to learn Quickshell and QML, design based on the game signalis.
