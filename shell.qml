@@ -15,13 +15,19 @@ PanelWindow {
     property color colYellow: "#e0af68"
     property color colDBlue: "#444b6a"
     property color colTxt: "#a9b1d6"
+    property color colRed: "#c3420b"
+    property color colWhite: '#ffffff'
+    property color colGrey: '#212221'
+    property color colBorder: '#605560'
+
 
     property string fontFamily: "Visitor TT2 BRK"
+
     property int fontSize: 20
+
     property int cpuUsage: 0
     property var lastCpuIdle: 0
     property var lastCpuTotal: 0
-
     property int ramUsage: 0
     property int storageUsage: 0
     property int gpuUsage: 0
@@ -92,7 +98,7 @@ PanelWindow {
         interval: 1000
         running: true
         repeat: true
-        onTriggered: cpuProc.running = true, ramProc.running = true, gpuProc.running = true, storageProc.running = true, dateProc.running = True
+        onTriggered: cpuProc.running = true, ramProc.running = true, gpuProc.running = true, storageProc.running = true
     }
 
     SystemClock {
@@ -103,25 +109,28 @@ PanelWindow {
     RowLayout {
         anchors.fill: parent
         anchors.margins: 8
+        
 
         Repeater {
             model: 9
-
-            Text {
+            
+            Rectangle {
+                Layout.preferredWidth: 20
+                Layout.preferredHeight: 10
                 property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
                 property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
 
+                color: isActive ? colWhite : (ws ? colRed : colGrey)
+                border.width: (!isActive && !ws) ? 2 : 0
+                border.color: colBorder
+                
+                
 
-                text: index +1
-                color: isActive ? colCyan : (ws ? colBlue : colDBlue)
-                font { family: root.fontFamily; pixelSize: root.fontSize; bold: true }
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
+                
                 }
             }
-        }
+        
 
         Item {Layout.fillWidth: true }
 
