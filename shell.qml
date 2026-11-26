@@ -55,7 +55,6 @@ PanelWindow {
     }
     }
 
-
     Process {
         id: cpuProc
         command: ["sh", "-c", "head -1 /proc/stat"]
@@ -92,8 +91,6 @@ PanelWindow {
     }
     }
 
-    
-
     Timer {
         interval: 1000
         running: true
@@ -110,7 +107,6 @@ PanelWindow {
         anchors.fill: parent
         anchors.margins: 8
         
-
         Repeater {
             model: 9
             
@@ -119,15 +115,9 @@ PanelWindow {
                 Layout.preferredHeight: 10
                 property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
                 property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-
                 color: isActive ? colWhite : (ws ? colRed : colGrey)
                 border.width: (!isActive && !ws) ? 2 : 0
                 border.color: colBorder
-                
-                
-
-
-                
                 }
             }
         
