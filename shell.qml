@@ -109,7 +109,7 @@ PanelWindow {
         
         Repeater {
             model: 9
-            
+
             Rectangle {
                 Layout.preferredWidth: 20
                 Layout.preferredHeight: 10
@@ -118,6 +118,10 @@ PanelWindow {
                 color: isActive ? colWhite : (ws ? colRed : colGrey)
                 border.width: (!isActive && !ws) ? 2 : 0
                 border.color: colBorder
+                MouseArea {
+                        anchors.fill: parent
+                        onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
+                    }
                 }
             }
         
