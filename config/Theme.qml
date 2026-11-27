@@ -18,5 +18,5 @@ Singleton {
 
     property string fontFamily: "Visitor TT2 BRK"
 
-    property int fontSizeBar: 20
+    property int fontSize: 20
 }

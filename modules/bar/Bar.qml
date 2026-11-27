@@ -1,9 +1,11 @@
+import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
-import qs.config.theme
+import qs.config
+import qs.services
 
 PanelWindow {
     id: root 
@@ -12,13 +14,13 @@ PanelWindow {
     anchors.left: true
     anchors.right: true
     implicitHeight: 30
-    color: colBg
+    color: Theme.colBg
 
     Text {
         anchors.centerIn: parent
         text: Qt.formatDateTime(clock.date, "dd/MM/yyyy") + "   achtung    " + Qt.formatDateTime(clock.date, "HH:mm:ss")
-        color: colTxt
-        font { family: root.fontFamily; pixelSize: root.fontSize; bold: true }
+        color: Theme.colTxt
+        font { family: Theme.fontFamily; pixelSize: Theme.fontSize; bold: true }
     }
 
     SystemClock {
@@ -38,9 +40,9 @@ PanelWindow {
                 Layout.preferredHeight: 10
                 property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
                 property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-                color: isActive ? colWhite : (ws ? colRed : colGrey)
+                color: isActive ? Theme.colWhite : (ws ? Theme.colRed : Theme.colGrey)
                 border.width: (!isActive && !ws) ? 2 : 0
-                border.color: colBorder
+                border.color: Theme.colBorder
                 MouseArea {
                         anchors.fill: parent
                         onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + (index + 1) + "})")
@@ -53,8 +55,8 @@ PanelWindow {
 
         Text {
             text: "CPU: " + SysStats.cpuUsage + "%   GPU: " + SysStats.gpuUsage + "%  SSD: " + SysStats.storageUsage + "%   RAM: " + SysStats.ramUsage + "%"
-            color: root.colYellow
-            font { family: root.fontFamily; pixelSize: root.fontSize; bold: true }
+            color: Theme.colYellow
+            font { family: Theme.fontFamily; pixelSize: Theme.fontSize; bold: true }
         }
 
     }
